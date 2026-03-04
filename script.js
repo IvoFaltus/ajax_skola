@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-            const res = await fetch("http://faltus-projekt.dev.spsejecna.net/testapi/default/", {
+            const res = await fetch("http://lmpss3.dev.spsejecna.net/procedure.php?cmd=saveDrinks", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
