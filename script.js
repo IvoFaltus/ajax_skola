@@ -1,6 +1,28 @@
+
+const url = "https://crm.skch.cz/ajax0/procedure.php"
+
+
+
+const username = "coffe"
+const password = "kafe";
+  function make_base_auth(user, password) {
+  return "Basic " + btoa(user + ":" + password);
+}
+
+const AUTH_HEADER = make_base_auth(username,password)
+
+
 const getNames = async () => {
     const obj = {}
-    const res = await fetch("http://lmpss3.dev.spsejecna.net/procedure.php?cmd=getPeopleList")
+    const res = await fetch(`${url}?cmd=getPeopleList`,{
+    method: 'GET',
+    credentials: 'include',
+    headers: {
+      'Authorization': AUTH_HEADER
+    }})
+
+
+
     const data = await res.json()
 
     for (key of Object.keys(data)) {
@@ -11,7 +33,12 @@ const getNames = async () => {
 
 const getDrinks = async () => {
     const arr = []
-    const res = await fetch("http://lmpss3.dev.spsejecna.net/procedure.php?cmd=getTypesList")
+    const res = await fetch(`${url}?cmd=getTypesList`,{
+    method: 'GET',
+    credentials: 'include',
+    headers: {
+      'Authorization': AUTH_HEADER
+    }})
     const data = await res.json()
 
     for (key of Object.keys(data)) {
@@ -91,9 +118,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-            const res = await fetch("http://lmpss3.dev.spsejecna.net/procedure.php?cmd=saveDrinks", {
+            const res = await fetch(`${url}?cmd=saveDrinks`, {
                 method: "POST",
                 headers: {
+                    "Authorization" :AUTH_HEADER,
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(payload)
