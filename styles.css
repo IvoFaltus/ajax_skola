@@ -95,7 +95,7 @@ button[type="submit"]:hover {
     }
 
     #drinks li {
-        grid-template-columns: 1fr auto auto auto;
+       
         gap: 6px;
     }
 

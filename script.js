@@ -61,6 +61,9 @@ document.addEventListener("DOMContentLoaded", () => {
             option.textContent = o[key]
             select.appendChild(option)
         }
+        if (window.sessionUser) {
+            window.sessionUser.applyLastUser(select)
+        }
     })
 
     getDrinks().then(arr => {
@@ -117,7 +120,12 @@ document.addEventListener("DOMContentLoaded", () => {
             }))
         }
 
+
+
         try {
+            if (window.sessionUser ) {
+                window.sessionUser.saveLastUser(select.value)
+            }
             const res = await fetch(`${url}?cmd=saveDrinks`, {
                 method: "POST",
                 headers: {
@@ -132,6 +140,11 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (err) {
             console.error("Submit failed:", err)
         }
+        location.reload()
+
+
+
+
     })
 
 })
